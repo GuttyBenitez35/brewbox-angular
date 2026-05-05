@@ -1,0 +1,119 @@
+<!-- src/app/shared/navbar/navbar.component.html -->
+<nav class="bg-brew-dark text-brew-cream sticky top-0 z-50 shadow-2xl">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo -->
+      <a routerLink="/" class="flex items-center space-x-2 group">
+        <span class="text-2xl">☕</span>
+        <span class="font-display text-xl font-bold text-brew-caramel group-hover:text-brew-cream transition-colors">
+          BrewBox
+        </span>
+      </a>
+
+      <!-- Links desktop -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a routerLink="/" routerLinkActive="text-brew-caramel"
+           [routerLinkActiveOptions]="{ exact: true }"
+           class="hover:text-brew-caramel transition-colors text-sm font-medium">
+          Inicio
+        </a>
+
+        <a routerLink="/catalogo" routerLinkActive="text-brew-caramel"
+           class="hover:text-brew-caramel transition-colors text-sm font-medium">
+          Catálogo
+        </a>
+
+        <ng-container *ngIf="estaAutenticado; else loginLinks">
+
+          <!-- ENLACE MIS PEDIDOS (Visible para todos los logueados) -->
+          <a routerLink="/mis-pedidos" 
+             routerLinkActive="text-brew-caramel"
+             class="hover:text-brew-caramel transition-colors text-sm font-medium">
+            Mis Pedidos
+          </a>
+
+          <!-- BOTONES EXCLUSIVOS ADMIN -->
+          <ng-container *ngIf="authService.esAdmin">
+            <!-- ESTADÍSTICAS (DASHBOARD) -->
+            <a routerLink="/admin/dashboard"
+               routerLinkActive="text-brew-caramel"
+               class="hover:text-brew-caramel transition-colors text-sm font-medium flex items-center gap-1">
+              <span>📊</span> Estadísticas
+            </a>
+
+            <!-- VENTAS -->
+            <a routerLink="/admin/ventas"
+               routerLinkActive="text-brew-caramel"
+               class="hover:text-brew-caramel transition-colors text-sm font-medium flex items-center gap-1">
+              <span>📋</span> Ventas
+            </a>
+
+            <!-- GESTIÓN (ADMIN PRINCIPAL) -->
+            <a routerLink="/admin"
+               routerLinkActive="text-brew-caramel"
+               class="hover:text-brew-caramel transition-colors text-sm font-medium flex items-center gap-1">
+              <span>⚙️</span> Gestión
+            </a>
+          </ng-container>
+
+          <button (click)="cerrarSesion()"
+                  class="hover:text-brew-caramel transition-colors text-sm font-medium border-l border-gray-700 pl-4 ml-2">
+            Salir
+          </button>
+
+        </ng-container>
+
+        <ng-template #loginLinks>
+          <a routerLink="/login" routerLinkActive="text-brew-caramel"
+             class="hover:text-brew-caramel transition-colors text-sm font-medium">
+            Login
+          </a>
+        </ng-template>
+      </div>
+
+      <!-- Carrito -->
+      <a routerLink="/carrito" class="relative group ml-4">
+        <div class="flex items-center space-x-1 hover:text-brew-caramel transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
+          <span class="hidden sm:inline text-sm font-medium">Carro</span>
+        </div>
+        <span *ngIf="cantidadCarrito > 0"
+              class="absolute -top-2 -right-2 bg-brew-caramel text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+          {{ cantidadCarrito }}
+        </span>
+      </a>
+
+      <!-- Hamburger (Móvil) -->
+      <button class="md:hidden ml-4" (click)="toggleMenuMovil()">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Menú móvil -->
+    <div *ngIf="menuMovilAbierto" class="md:hidden pb-4 space-y-2">
+      <a routerLink="/" (click)="menuMovilAbierto=false" class="block px-3 py-2 hover:bg-brew-brown rounded">Inicio</a>
+      <a routerLink="/catalogo" (click)="menuMovilAbierto=false" class="block px-3 py-2 hover:bg-brew-brown rounded">Catálogo</a>
+      
+      <ng-container *ngIf="estaAutenticado">
+        <a routerLink="/mis-pedidos" (click)="menuMovilAbierto=false" class="block px-3 py-2 hover:bg-brew-brown rounded">Mis Pedidos</a>
+        
+        <!-- ADMIN MÓVIL -->
+        <ng-container *ngIf="authService.esAdmin">
+          <hr class="border-gray-700 my-1">
+          <a routerLink="/admin/dashboard" (click)="menuMovilAbierto=false" class="block px-3 py-2 hover:bg-brew-brown rounded text-brew-caramel font-bold">📊 Estadísticas Admin</a>
+          <a routerLink="/admin/ventas" (click)="menuMovilAbierto=false" class="block px-3 py-2 hover:bg-brew-brown rounded text-brew-caramel">📋 Lista de Ventas</a>
+          <a routerLink="/admin" (click)="menuMovilAbierto=false" class="block px-3 py-2 hover:bg-brew-brown rounded text-brew-caramel">⚙️ Gestión Productos</a>
+        </ng-container>
+
+        <button (click)="cerrarSesion()" class="block w-full text-left px-3 py-2 hover:bg-brew-brown rounded text-red-400 mt-2">Cerrar Sesión</button>
+      </ng-container>
+
+      <a *ngIf="!estaAutenticado" routerLink="/login" (click)="menuMovilAbierto=false" class="block px-3 py-2 hover:bg-brew-brown rounded">Login</a>
+    </div>
+  </div>
+</nav>

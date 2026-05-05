@@ -1,0 +1,209 @@
+<!-- src/app/pages/home/home.component.html -->
+
+<!-- 1. HERO SECTION -->
+<section class="relative h-[90vh] flex items-center justify-center overflow-hidden bg-brew-dark">
+  <div class="absolute inset-0 z-0">
+    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=1920" 
+         class="w-full h-full object-cover opacity-30 scale-105" alt="Café de especialidad">
+    <!-- Overlay de gradiente más profundo -->
+    <div class="absolute inset-0 bg-gradient-to-t from-brew-dark via-brew-dark/50 to-transparent"></div>
+  </div>
+
+  <div class="relative z-10 text-center px-4 max-w-5xl">
+    <span class="inline-block px-4 py-1 border border-brew-caramel/50 rounded-full text-brew-caramel text-xs tracking-[0.3em] uppercase mb-6 animate-pulse">
+      Directo de origen • Tarija, Bolivia
+    </span>
+    <h1 class="text-7xl md:text-9xl font-display font-bold text-brew-cream mb-6 tracking-tighter leading-none">
+      Brew<span class="text-brew-caramel italic">Box</span>
+    </h1>
+    <p class="text-xl md:text-2xl text-brew-cream/70 mb-12 font-light max-w-2xl mx-auto leading-relaxed">
+      Elevando el estándar del café boliviano a través de procesos artesanales y tecnología de precisión.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+      <a routerLink="/catalogo" 
+         class="group relative bg-brew-caramel text-white px-12 py-5 rounded-full font-bold text-lg overflow-hidden transition-all shadow-2xl">
+        <span class="relative z-10">Explorar Selección</span>
+        <div class="absolute inset-0 bg-brew-brown translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+      </a>
+      <a routerLink="/carrito" 
+         class="text-brew-cream hover:text-brew-caramel transition-colors font-bold text-lg flex items-center gap-2">
+        Ir al carrito 
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 2. CATEGORÍAS (Minimalistas) -->
+<section class="py-24 px-6 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+      <div class="group cursor-pointer text-center">
+        <div class="w-20 h-20 mx-auto bg-brew-cream rounded-full flex items-center justify-center text-3xl mb-4 group-hover:bg-brew-caramel group-hover:text-white transition-all duration-500 shadow-sm">🫘</div>
+        <h3 class="font-bold text-brew-dark text-sm uppercase tracking-widest">En Grano</h3>
+      </div>
+      <div class="group cursor-pointer text-center">
+        <div class="w-20 h-20 mx-auto bg-brew-cream rounded-full flex items-center justify-center text-3xl mb-4 group-hover:bg-brew-caramel group-hover:text-white transition-all duration-500 shadow-sm">☕</div>
+        <h3 class="font-bold text-brew-dark text-sm uppercase tracking-widest">Molido</h3>
+      </div>
+      <div class="group cursor-pointer text-center">
+        <div class="w-20 h-20 mx-auto bg-brew-cream rounded-full flex items-center justify-center text-3xl mb-4 group-hover:bg-brew-caramel group-hover:text-white transition-all duration-500 shadow-sm">⚙️</div>
+        <h3 class="font-bold text-brew-dark text-sm uppercase tracking-widest">Métodos</h3>
+      </div>
+      <div class="group cursor-pointer text-center">
+        <div class="w-20 h-20 mx-auto bg-brew-cream rounded-full flex items-center justify-center text-3xl mb-4 group-hover:bg-brew-caramel group-hover:text-white transition-all duration-500 shadow-sm">🫗</div>
+        <h3 class="font-bold text-brew-dark text-sm uppercase tracking-widest">Prensas</h3>
+      </div>
+      <div class="group cursor-pointer text-center">
+        <div class="w-20 h-20 mx-auto bg-brew-cream rounded-full flex items-center justify-center text-3xl mb-4 group-hover:bg-brew-caramel group-hover:text-white transition-all duration-500 shadow-sm">⚒️</div>
+        <h3 class="font-bold text-brew-dark text-sm uppercase tracking-widest">Accesorios</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. FRASE MODERNA / MANIFIESTO (Nueva Sección Impactante) -->
+<section class="py-32 px-6 bg-brew-dark relative overflow-hidden">
+    <!-- Círculos decorativos desenfocados -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-brew-caramel/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-brew-brown/20 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
+
+    <div class="max-w-5xl mx-auto relative z-10 text-center">
+        <h2 class="text-4xl md:text-6xl font-display font-bold text-brew-cream leading-[1.1] tracking-tight">
+            "No servimos solo café, <br>
+            <span class="text-brew-caramel italic">diseñamos rituales</span> de perfección <br>
+            desde la semilla hasta tu taza."
+        </h2>
+        <div class="mt-10 flex justify-center items-center gap-4">
+            <div class="h-[1px] w-12 bg-brew-caramel/50"></div>
+            <span class="text-brew-cream/50 uppercase tracking-[0.4em] text-xs">The BrewBox Standard</span>
+            <div class="h-[1px] w-12 bg-brew-caramel/50"></div>
+        </div>
+    </div>
+</section>
+
+<!-- 4. ESPECIALIDAD DE LA SEMANA ✨ -->
+<section class="py-32 px-6 bg-gray-50">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-20">
+        <div class="max-w-2xl">
+            <span class="text-brew-caramel font-bold tracking-widest uppercase text-sm">Curaduría Exclusiva</span>
+            <h2 class="text-5xl font-display font-bold text-brew-dark mt-2 leading-none">Especialidad de la Semana</h2>
+        </div>
+        <p class="text-gray-500 mt-4 md:mt-0 italic">Lotes limitados, sabores infinitos.</p>
+      </div>
+  
+      <!-- Cargando -->
+      <div *ngIf="cargando" class="flex justify-center py-20">
+          <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brew-caramel"></div>
+      </div>
+
+      <div *ngIf="!cargando && productosMasVendidos.length > 0" class="grid md:grid-cols-3 gap-12">
+        <div *ngFor="let p of productosMasVendidos" 
+             class="group relative bg-white rounded-[3.5rem] p-4 shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500">
+          
+          <!-- Image Container -->
+          <div class="relative h-[400px] w-full overflow-hidden rounded-[3rem]">
+            <img [src]="p.imagen_url" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-10">
+                <button (click)="agregarAlCarrito(p)" class="w-full bg-brew-cream text-brew-dark py-4 rounded-2xl font-bold shadow-lg transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500">
+                    Añadir al Carrito — ${{ p.precio }}
+                </button>
+            </div>
+          </div>
+
+          <div class="p-8 text-center">
+            <h3 class="text-2xl font-bold text-brew-dark mb-2">{{ p.nombre }}</h3>
+            
+            <!-- Perfil de sabor (Simulado para que se vea Pro) -->
+            <div class="flex justify-center gap-4 mt-4">
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] uppercase text-gray-400 font-bold tracking-tighter">Cuerpo</span>
+                    <div class="flex gap-1 mt-1">
+                        <div class="w-2 h-2 rounded-full bg-brew-caramel"></div>
+                        <div class="w-2 h-2 rounded-full bg-brew-caramel"></div>
+                        <div class="w-2 h-2 rounded-full bg-gray-200"></div>
+                    </div>
+                </div>
+                <div class="h-8 w-[1px] bg-gray-100"></div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[10px] uppercase text-gray-400 font-bold tracking-tighter">Acidez</span>
+                    <div class="flex gap-1 mt-1">
+                        <div class="w-2 h-2 rounded-full bg-brew-caramel"></div>
+                        <div class="w-2 h-2 rounded-full bg-brew-caramel"></div>
+                        <div class="w-2 h-2 rounded-full bg-brew-caramel"></div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Estado vacío -->
+      <div *ngIf="!cargando && productosMasVendidos.length === 0"
+           class="text-center py-20 bg-white rounded-[4rem] border-2 border-dashed border-gray-100">
+        <span class="text-7xl block mb-6">🏜️</span>
+        <h3 class="text-2xl font-bold text-brew-dark">Esperando la cosecha</h3>
+        <p class="text-gray-400 mt-2">Nuevas especialidades están en camino.</p>
+      </div>
+    </div>
+</section>
+
+<!-- 5. FEATURES (Grid Moderno) -->
+<section class="py-32 bg-white">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid md:grid-cols-4 gap-16">
+      <div class="text-left">
+        <span class="text-4xl mb-6 block">🚀</span>
+        <h4 class="font-bold text-xl mb-3 text-brew-dark">Logística Express</h4>
+        <p class="text-gray-500 text-sm leading-relaxed">Tus granos llegan frescos, conservando el CO2 ideal para una extracción perfecta.</p>
+      </div>
+      <div class="text-left">
+        <span class="text-4xl mb-6 block">🌱</span>
+        <h4 class="font-bold text-xl mb-3 text-brew-dark">Trazabilidad Total</h4>
+        <p class="text-gray-500 text-sm leading-relaxed">Conoce la finca, la altura y el productor detrás de cada bolsa de café.</p>
+      </div>
+      <div class="text-left">
+        <span class="text-4xl mb-6 block">💎</span>
+        <h4 class="font-bold text-xl mb-3 text-brew-dark">SCA Standard</h4>
+        <p class="text-gray-500 text-sm leading-relaxed">Solo seleccionamos cafés calificados por encima de los 85 puntos en taza.</p>
+      </div>
+      <div class="text-left">
+        <span class="text-4xl mb-6 block">🔄</span>
+        <h4 class="font-bold text-xl mb-3 text-brew-dark">Asesoría de Barista</h4>
+        <p class="text-gray-500 text-sm leading-relaxed">¿Dudas con tu receta? Nuestro equipo está listo para ayudarte a calibrar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. HISTORIA -->
+<section class="py-32 px-6 bg-brew-cream relative overflow-hidden">
+  <div class="absolute -right-20 -bottom-20 text-[25rem] font-display font-bold text-brew-dark opacity-[0.03] select-none italic">
+    Tarija
+  </div>
+  
+  <div class="max-w-4xl mx-auto text-center relative z-10">
+    <h2 class="text-5xl font-display font-bold text-brew-dark mb-10">Nuestra historia</h2>
+    <div class="space-y-8 text-2xl text-gray-800 leading-relaxed font-light italic">
+        <p>
+            "BrewBox nació bajo el sol de los valles tarijeños, con un sueño claro: que el mejor café de nuestra tierra se quede en nuestra tierra."
+        </p>
+        <p class="text-lg not-italic text-gray-500 font-normal">
+            Somos un colectivo de apasionados, tostadores y baristas dedicados a honrar el trabajo del caficultor boliviano, llevando la excelencia de la finca directamente a tu hogar.
+        </p>
+    </div>
+    <div class="mt-16 flex justify-center">
+        <div class="w-24 h-[2px] bg-brew-caramel"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. NOTIFICACIÓN FLOTANTE -->
+<div *ngIf="notificacion" 
+     class="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] bg-brew-dark/90 backdrop-blur-xl text-brew-cream px-10 py-5 rounded-3xl shadow-2xl border border-brew-caramel/30 animate-in fade-in slide-in-from-bottom-10 duration-500 flex items-center gap-4">
+  <div class="w-2 h-2 bg-brew-caramel rounded-full animate-ping"></div>
+  <span class="font-medium tracking-tight">{{ notificacion }}</span>
+</div>

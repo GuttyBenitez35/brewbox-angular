@@ -1,0 +1,30 @@
+/* src/styles.css */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-body bg-brew-light text-brew-dark;
+  }
+  h1, h2, h3 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brew-caramel hover:bg-brew-brown text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95;
+  }
+  .btn-secondary {
+    @apply border-2 border-brew-caramel text-brew-caramel hover:bg-brew-caramel hover:text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300;
+  }
+  .card {
+    @apply bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300;
+  }
+  .skeleton {
+    @apply animate-pulse bg-gray-200 rounded;
+  }
+}

@@ -1,0 +1,33 @@
+<!-- src/app/shared/footer/footer.component.html -->
+<footer class="bg-brew-dark text-brew-cream py-12 mt-auto">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+    
+    <div>
+      <h3 class="font-display text-xl font-bold text-brew-caramel mb-3">☕ BrewBox</h3>
+      <p class="text-sm text-gray-400 leading-relaxed">
+        Café de especialidad y equipos de preparación para quienes toman el café en serio.
+      </p>
+    </div>
+
+    <div>
+      <h4 class="font-semibold mb-3 text-brew-caramel">Navegación</h4>
+      <ul class="space-y-2 text-sm text-gray-400">
+        <li><a routerLink="/" class="hover:text-brew-caramel transition-colors">Inicio</a></li>
+        <li><a routerLink="/catalogo" class="hover:text-brew-caramel transition-colors">Catálogo</a></li>
+        <li><a routerLink="/carrito" class="hover:text-brew-caramel transition-colors">Carro</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 class="font-semibold mb-3 text-brew-caramel">Contacto</h4>
+      <ul class="space-y-2 text-sm text-gray-400">
+        <li>📧hola&#64;brewbox.com</li>
+        <li>📱 +591 70000000</li>
+        <li>📍 Tarija, Bolivia</li>
+      </ul>
+    </div>
+  </div>
+  <div class="text-center text-xs text-gray-600 mt-8">
+    © {{ currentYear }} BrewBox. Todos los derechos reservados.
+  </div>
+</footer>

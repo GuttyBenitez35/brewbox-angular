@@ -1,0 +1,58 @@
+<!-- src/app/pages/login/login.component.html -->
+<div class="min-h-screen bg-brew-dark flex items-center justify-center p-4">
+  <div class="w-full max-w-md">
+    
+    <div class="text-center mb-8">
+      <span class="text-5xl">☕</span>
+      <h1 class="font-display text-3xl font-bold text-brew-cream mt-3">Bienvenido a BrewBox</h1>
+      <p class="text-gray-400 mt-2 text-sm">Inicia sesión para continuar</p>
+    </div>
+
+    <div class="bg-white rounded-3xl p-8 shadow-2xl">
+      <form [formGroup]="formulario" (ngSubmit)="iniciarSesion()" class="space-y-5">
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+          <input type="email" formControlName="email"
+                 class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brew-caramel text-sm"
+                 [class.border-red-400]="campoInvalido('email')"
+                 placeholder="tu@email.com">
+          <p *ngIf="campoInvalido('email')" class="text-red-400 text-xs mt-1">Email inválido</p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
+          <div class="relative">
+            <input [type]="mostrarPassword ? 'text' : 'password'" 
+                   formControlName="password"
+                   class="w-full border rounded-xl px-4 py-3 pr-12 focus:outline-none focus:ring-2 focus:ring-brew-caramel text-sm"
+                   [class.border-red-400]="campoInvalido('password')"
+                   placeholder="••••••••">
+            <button type="button" (click)="mostrarPassword = !mostrarPassword"
+                    class="absolute right-3 top-3 text-gray-400 hover:text-gray-600">
+              {{ mostrarPassword ? '🙈' : '👁' }}
+            </button>
+          </div>
+          <p *ngIf="campoInvalido('password')" class="text-red-400 text-xs mt-1">
+            Mínimo 6 caracteres
+          </p>
+        </div>
+
+        <div *ngIf="error" class="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-xl">
+          {{ error }}
+        </div>
+
+        <button type="submit" [disabled]="cargando"
+                class="btn-primary w-full flex items-center justify-center gap-2">
+          <span *ngIf="cargando" class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+          {{ cargando ? 'Ingresando...' : 'Iniciar Sesión' }}
+        </button>
+      </form>
+
+      <p class="text-center text-sm text-gray-500 mt-6">
+        ¿No tienes cuenta? 
+        <a routerLink="/register" class="text-brew-caramel hover:underline font-medium">Regístrate aquí</a>
+      </p>
+    </div>
+  </div>
+</div>

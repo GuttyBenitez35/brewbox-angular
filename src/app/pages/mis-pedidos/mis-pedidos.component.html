@@ -1,0 +1,49 @@
+<div class="min-h-screen bg-gray-50 py-12 px-4">
+  <div class="max-w-3xl mx-auto">
+    
+    <h1 class="text-3xl font-display font-bold text-brew-dark mb-8">Mis Pedidos</h1>
+
+    <!-- Pantalla de carga -->
+    <div *ngIf="cargando" class="text-center py-20">
+      <div class="animate-spin inline-block w-8 h-8 border-4 border-brew-caramel border-t-transparent rounded-full mb-4"></div>
+      <p class="text-gray-500">Buscando tus cafecitos...</p>
+    </div>
+
+    <!-- Lista de pedidos -->
+    <div *ngIf="!cargando && pedidos.length > 0" class="space-y-4">
+      <div *ngFor="let p of pedidos" 
+           class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+        
+        <div class="flex justify-between items-start mb-4">
+          <div>
+            <p class="text-xs text-gray-400 font-mono">ID: #{{ p.id.substring(0,8).toUpperCase() }}</p>
+            <p class="text-sm text-gray-500">{{ p.created_at | date:'dd/MM/yyyy HH:mm' }}</p>
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-bold uppercase"
+                [ngClass]="{
+                  'bg-yellow-100 text-yellow-700': p.estado === 'pendiente',
+                  'bg-blue-100 text-blue-700': p.estado === 'procesando',
+                  'bg-green-100 text-green-700': p.estado === 'entregado'
+                }">
+            {{ p.estado }}
+          </span>
+        </div>
+
+        <div class="flex justify-between items-center border-t pt-4">
+          <span class="text-gray-600 font-medium">Total pagado:</span>
+          <span class="text-xl font-bold text-brew-caramel">${{ p.total | number:'1.2-2' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensaje si no hay pedidos -->
+    <div *ngIf="!cargando && pedidos.length === 0" 
+         class="text-center py-20 bg-white rounded-3xl border-2 border-dashed border-gray-200">
+      <p class="text-gray-400 text-lg">Aún no has realizado ningún pedido.</p>
+      <a routerLink="/catalogo" class="mt-4 inline-block text-brew-caramel font-bold hover:underline">
+        ¡Ir al catálogo ahora!
+      </a>
+    </div>
+
+  </div>
+</div>

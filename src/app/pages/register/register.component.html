@@ -1,0 +1,76 @@
+<!-- src/app/pages/register/register.component.html -->
+<div class="min-h-screen bg-brew-dark flex items-center justify-center p-4">
+  <div class="w-full max-w-md">
+    
+    <div class="text-center mb-8">
+      <span class="text-5xl">🌱</span>
+      <h1 class="font-display text-3xl font-bold text-brew-cream mt-3">Crear cuenta</h1>
+      <p class="text-gray-400 mt-2 text-sm">Únete a la comunidad BrewBox</p>
+    </div>
+
+    <!-- Éxito de registro -->
+    <div *ngIf="registroExitoso" class="bg-green-50 rounded-3xl p-8 text-center">
+      <div class="text-5xl mb-4">✅</div>
+      <h2 class="font-semibold text-green-800 text-lg mb-2">¡Cuenta creada!</h2>
+      <p class="text-green-600 text-sm mb-6">Revisa tu email para confirmar tu cuenta.</p>
+      <a routerLink="/login" class="btn-primary inline-block">Ir al Login</a>
+    </div>
+
+    <div *ngIf="!registroExitoso" class="bg-white rounded-3xl p-8 shadow-2xl">
+      <form [formGroup]="formulario" (ngSubmit)="registrar()" class="space-y-5">
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Nombre completo</label>
+          <input type="text" formControlName="nombre_completo"
+                 class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brew-caramel text-sm"
+                 [class.border-red-400]="campoInvalido('nombre_completo')"
+                 placeholder="Ana García">
+          <p *ngIf="campoInvalido('nombre_completo')" class="text-red-400 text-xs mt-1">Mínimo 3 caracteres</p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+          <input type="email" formControlName="email"
+                 class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brew-caramel text-sm"
+                 [class.border-red-400]="campoInvalido('email')"
+                 placeholder="ana@email.com">
+          <p *ngIf="campoInvalido('email')" class="text-red-400 text-xs mt-1">Email inválido</p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
+          <input type="password" formControlName="password"
+                 class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brew-caramel text-sm"
+                 [class.border-red-400]="campoInvalido('password')"
+                 placeholder="Mínimo 6 caracteres">
+          <p *ngIf="campoInvalido('password')" class="text-red-400 text-xs mt-1">Mínimo 6 caracteres</p>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Confirmar contraseña</label>
+          <input type="password" formControlName="confirmar_password"
+                 class="w-full border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brew-caramel text-sm"
+                 [class.border-red-400]="formulario.hasError('noCoinciden') && formulario.get('confirmar_password')?.touched"
+                 placeholder="Repite tu contraseña">
+          <p *ngIf="formulario.hasError('noCoinciden') && formulario.get('confirmar_password')?.touched"
+             class="text-red-400 text-xs mt-1">Las contraseñas no coinciden</p>
+        </div>
+
+        <div *ngIf="error" class="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-xl">
+          {{ error }}
+        </div>
+
+        <button type="submit" [disabled]="cargando"
+                class="btn-primary w-full flex items-center justify-center gap-2">
+          <span *ngIf="cargando" class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+          {{ cargando ? 'Creando cuenta...' : 'Crear cuenta' }}
+        </button>
+      </form>
+
+      <p class="text-center text-sm text-gray-500 mt-6">
+        ¿Ya tienes cuenta? 
+        <a routerLink="/login" class="text-brew-caramel hover:underline font-medium">Inicia sesión</a>
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,127 @@
+<!-- src/app/pages/catalogo/catalogo.component.html -->
+<div class="min-h-screen bg-brew-light">
+
+  <!-- Notificación -->
+  <div *ngIf="notificacion" 
+       class="fixed top-20 right-4 z-50 bg-brew-dark text-brew-cream px-6 py-3 rounded-xl shadow-2xl">
+    {{ notificacion }}
+  </div>
+
+  <!-- Header -->
+  <div class="bg-brew-dark text-brew-cream py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <h1 class="font-display text-4xl font-bold mb-2">Catálogo</h1>
+      <p class="text-gray-400">{{ productosFiltrados.length }} productos disponibles</p>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="flex flex-col md:flex-row gap-8">
+      
+      <!-- FILTROS -->
+      <aside class="w-full md:w-64 flex-shrink-0">
+        <div class="bg-white rounded-2xl p-6 shadow-sm sticky top-20">
+          <h3 class="font-semibold text-brew-dark mb-4">Categorías</h3>
+          <ul class="space-y-2">
+            <li *ngFor="let cat of categorias">
+              <button (click)="seleccionarCategoria(cat.key)"
+                      [class.bg-brew-caramel]="categoriaSeleccionada === cat.key"
+                      [class.text-white]="categoriaSeleccionada === cat.key"
+                      class="w-full text-left px-3 py-2 rounded-lg hover:bg-brew-cream transition-colors text-sm flex items-center gap-2">
+                <span>{{ cat.emoji }}</span>
+                <span>{{ cat.label }}</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- PRODUCTOS -->
+      <main class="flex-1">
+        
+        <!-- Barra superior -->
+        <div class="flex flex-col sm:flex-row gap-4 mb-6">
+          <input type="text" 
+                 placeholder="🔍 Buscar productos..."
+                 (input)="onBusqueda($event)"
+                 class="flex-1 border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brew-caramel text-sm">
+
+          <select (change)="onOrdenamiento($event)"
+                  class="border border-gray-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brew-caramel text-sm bg-white">
+            <option value="nombre">Nombre A-Z</option>
+            <option value="precio_asc">Precio: menor a mayor</option>
+            <option value="precio_desc">Precio: mayor a menor</option>
+          </select>
+        </div>
+
+        <!-- Loading -->
+        <div *ngIf="cargando" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div *ngFor="let i of [1,2,3,4,5,6]" class="card p-4">
+            <div class="skeleton h-48 w-full mb-4 rounded-xl"></div>
+            <div class="skeleton h-4 w-3/4 mb-2"></div>
+            <div class="skeleton h-4 w-1/2 mb-4"></div>
+            <div class="skeleton h-10 w-full"></div>
+          </div>
+        </div>
+
+        <!-- Sin resultados -->
+        <div *ngIf="!cargando && productosFiltrados.length === 0" 
+             class="text-center py-20">
+          <div class="text-6xl mb-4">☕</div>
+          <h3 class="font-display text-2xl text-brew-dark mb-2">Sin resultados</h3>
+          <p class="text-gray-400 mb-6">No encontramos productos con esos filtros.</p>
+          <button (click)="seleccionarCategoria('todos')" class="btn-primary">
+            Ver todos
+          </button>
+        </div>
+
+        <!-- Grid -->
+        <div *ngIf="!cargando && productosFiltrados.length > 0" 
+             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <div *ngFor="let producto of productosFiltrados" 
+               class="card overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+
+            <div class="relative overflow-hidden h-48">
+              <img [src]="producto.imagen_url" 
+                   [alt]="producto.nombre"
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+
+              <span *ngIf="producto.stock < 5" 
+                    class="absolute top-3 right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
+                ¡Últimas {{ producto.stock }}!
+              </span>
+            </div>
+
+            <div class="p-5">
+              <div class="text-xs text-brew-caramel font-semibold uppercase tracking-wide mb-1">
+                {{ producto.categoria.replace('_', ' ') }}
+              </div>
+
+              <h3 class="font-semibold text-brew-dark mb-2 line-clamp-1">
+                {{ producto.nombre }}
+              </h3>
+
+              <p class="text-gray-400 text-xs mb-4 line-clamp-2 leading-relaxed">
+                {{ producto.descripcion }}
+              </p>
+
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-brew-caramel text-xl">
+                  ${{ producto.precio | number:'1.2-2' }}
+                </span>
+
+                <button (click)="agregarAlCarrito(producto)"
+                        [disabled]="producto.stock === 0"
+                        class="bg-brew-dark hover:bg-brew-caramel disabled:bg-gray-300 text-white text-sm px-4 py-2 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95">
+                  {{ producto.stock > 0 ? '+ Carro' : 'Agotado' }}
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>

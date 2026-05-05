@@ -1,0 +1,70 @@
+<div class="p-6">
+
+  <h1 class="text-3xl font-bold mb-6">📊 Dashboard Admin</h1>
+
+  <!-- ESTADÍSTICAS -->
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10">
+
+    <div class="bg-white p-4 rounded-xl shadow">
+      <p class="text-gray-500">💰 Ingresos</p>
+      <h2 class="text-2xl font-bold">${{ ingresos.toFixed(2) }}</h2>
+    </div>
+
+    <div class="bg-white p-4 rounded-xl shadow">
+      <p class="text-gray-500">📦 Pedidos</p>
+      <h2 class="text-2xl font-bold">{{ totalPedidos }}</h2>
+    </div>
+
+    <div class="bg-yellow-100 p-4 rounded-xl shadow">
+      <p class="text-gray-600">⏳ Pendientes</p>
+      <h2 class="text-2xl font-bold">{{ pendientes }}</h2>
+    </div>
+
+    <div class="bg-green-100 p-4 rounded-xl shadow">
+      <p class="text-gray-600">✅ Entregados</p>
+      <h2 class="text-2xl font-bold">{{ entregados }}</h2>
+    </div>
+
+  </div>
+
+  <!-- GRÁFICO SIMPLE (sin librería compleja por ahora) -->
+  <h2 class="text-xl font-bold mb-4">Estado de pedidos</h2>
+
+  <div class="space-y-3 mb-10">
+
+    <div class="bg-yellow-400 text-black p-3 rounded"
+         [style.width.%]="(pendientes / totalPedidos) * 100">
+      Pendientes {{ pendientes }}
+    </div>
+
+    <div class="bg-green-500 text-white p-3 rounded"
+         [style.width.%]="(entregados / totalPedidos) * 100">
+      Entregados {{ entregados }}
+    </div>
+
+  </div>
+
+  <!-- TABLA -->
+  <h2 class="text-xl font-bold mb-4">Últimos pedidos</h2>
+
+  <table class="w-full bg-white shadow rounded-xl overflow-hidden">
+    <thead class="bg-gray-100">
+      <tr>
+        <th class="p-2 text-left">Cliente</th>
+        <th>Total</th>
+        <th>Estado</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let p of pedidos.slice(0,5)">
+        <td class="p-2">{{ p.nombre_cliente }}</td>
+        <td>${{ p.total }}</td>
+        <td>{{ p.estado }}</td>
+        <td>{{ p.created_at | date }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

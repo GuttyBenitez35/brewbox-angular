@@ -1,0 +1,136 @@
+<!-- src/app/pages/carrito/carrito.component.html -->
+<div class="min-h-screen bg-brew-light">
+  <div class="max-w-5xl mx-auto px-4 py-10">
+
+    <h1 class="font-display text-4xl font-bold text-brew-dark mb-8">
+      Mi Carro
+    </h1>
+
+    <!-- VACÍO -->
+    <div *ngIf="items.length === 0" class="text-center py-24">
+      <div class="text-8xl mb-6">🛒</div>
+      <h2 class="font-display text-3xl text-brew-dark mb-3">
+        Tu carro está vacío
+      </h2>
+      <p class="text-gray-400 mb-8">
+        ¿Buscas un buen café? Tenemos justo lo que necesitas.
+      </p>
+
+      <a routerLink="/catalogo" class="btn-primary inline-block">
+        Explorar Catálogo
+      </a>
+    </div>
+
+    <!-- CON PRODUCTOS -->
+    <div *ngIf="items.length > 0" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+      <!-- Lista -->
+      <div class="lg:col-span-2 space-y-4">
+
+        <div *ngFor="let item of items"
+             class="bg-white rounded-2xl p-5 shadow-sm flex gap-4 items-center">
+
+          <img [src]="item.producto.imagen_url"
+               [alt]="item.producto.nombre"
+               class="w-20 h-20 object-cover rounded-xl flex-shrink-0">
+
+          <div class="flex-1 min-w-0">
+            <h3 class="font-semibold text-brew-dark text-sm mb-1 truncate">
+              {{ item.producto.nombre }}
+            </h3>
+
+            <p class="text-brew-caramel font-bold">
+              ${{ item.producto.precio | number:'1.2-2' }}
+            </p>
+          </div>
+
+          <!-- Cantidad -->
+          <div class="flex items-center gap-2 flex-shrink-0">
+
+            <button (click)="cambiarCantidad(item.producto.id, -1)"
+                    [disabled]="actualizando === item.producto.id"
+                    class="w-8 h-8 rounded-full border-2 border-brew-caramel text-brew-caramel hover:bg-brew-caramel hover:text-white transition-all font-bold disabled:opacity-50">
+              −
+            </button>
+
+            <span class="w-8 text-center font-semibold">
+              <ng-container *ngIf="actualizando !== item.producto.id; else spinner">
+                {{ item.cantidad }}
+              </ng-container>
+
+              <ng-template #spinner>
+                <span class="inline-block w-4 h-4 border-2 border-brew-caramel border-t-transparent rounded-full animate-spin"></span>
+              </ng-template>
+            </span>
+
+            <button (click)="cambiarCantidad(item.producto.id, 1)"
+                    [disabled]="actualizando === item.producto.id"
+                    class="w-8 h-8 rounded-full border-2 border-brew-caramel text-brew-caramel hover:bg-brew-caramel hover:text-white transition-all font-bold disabled:opacity-50">
+              +
+            </button>
+
+          </div>
+
+          <!-- Subtotal -->
+          <div class="text-right flex-shrink-0">
+            <p class="font-bold text-brew-dark">
+              ${{ (item.producto.precio * item.cantidad) | number:'1.2-2' }}
+            </p>
+
+            <button (click)="eliminar(item.producto.id)"
+                    class="text-red-400 hover:text-red-600 text-xs mt-1 transition-colors">
+              🗑 Eliminar
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Resumen -->
+      <div class="bg-white rounded-2xl p-6 shadow-sm h-fit sticky top-20">
+
+        <h3 class="font-display text-xl font-bold text-brew-dark mb-6">
+          Resumen
+        </h3>
+
+        <div class="space-y-3 text-sm mb-6">
+
+          <div class="flex justify-between text-gray-600">
+            <span>Subtotal</span>
+            <span>${{ subtotal | number:'1.2-2' }}</span>
+          </div>
+
+          <div class="flex justify-between text-gray-600">
+            <span>Envío</span>
+            <span [class.text-green-500]="envio === 0">
+              {{ envio === 0 ? 'GRATIS' : ('$' + envio) }}
+            </span>
+          </div>
+
+          <p *ngIf="envio > 0" class="text-xs text-gray-400">
+            Agrega ${{ (50 - subtotal) | number:'1.2-2' }} más para envío gratis
+          </p>
+
+          <hr class="border-gray-100">
+
+          <div class="flex justify-between font-bold text-brew-dark text-lg">
+            <span>Total</span>
+            <span>${{ totalFinal | number:'1.2-2' }}</span>
+          </div>
+
+        </div>
+
+        <button (click)="irCheckout()"
+                class="btn-primary w-full text-center">
+          Finalizar Compra →
+        </button>
+
+        <a routerLink="/catalogo"
+           class="block text-center text-sm text-gray-400 hover:text-brew-caramel mt-4 transition-colors">
+          ← Seguir comprando
+        </a>
+
+      </div>
+    </div>
+  </div>
+</div>
